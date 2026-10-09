@@ -1,6 +1,14 @@
 # AWS LLMOps Platform Architecture
 
-## Target Architecture
+## Project Overview
+
+This project implements a production-style Retrieval-Augmented
+Generation (RAG) platform on AWS.
+
+The platform will use AWS cloud infrastructure,
+Terraform, Kubernetes, CI/CD and LLMOps practices.
+
+## High-Level Architecture
 
 User
 ↓
@@ -13,18 +21,53 @@ FastAPI RAG Application
 Vector Search
 ↓
 LLM
+↓
+Final Answer
 
-## Supporting AWS Services
+## RAG Architecture
+
+### Document Ingestion
+
+Documents
+↓
+Text Extraction
+↓
+Chunking
+↓
+Embeddings
+↓
+Vector Database
+
+### User Query
+
+User Question
+↓
+Question Embedding
+↓
+Similarity Search
+↓
+Relevant Chunks
+↓
+Context + Question
+↓
+LLM
+↓
+Final Answer
+
+## AWS Supporting Services
 
 - Amazon S3
-- IAM
+- Amazon EKS
 - Amazon ECR
-- CloudWatch
+- IAM
 - KMS
+- CloudWatch
+- Application Load Balancer
 
-## Infrastructure
+## Infrastructure as Code
 
-Infrastructure will be provisioned using Terraform.
+Terraform will be used to provision and manage
+the AWS infrastructure.
 
 ## CI/CD
 
@@ -37,3 +80,36 @@ Docker Build
 Amazon ECR
 ↓
 Amazon EKS
+
+## Monitoring
+
+CloudWatch will be used for:
+
+- Application logs
+- Infrastructure monitoring
+- Metrics
+- Alerts
+
+## Security
+
+The platform will use:
+
+- IAM
+- IAM roles
+- Least privilege
+- KMS encryption
+- Kubernetes Secrets
+- Secure configuration management
+
+## Future RAG Components
+
+The RAG implementation will include:
+
+- Document processing
+- Chunking
+- Embeddings
+- Vector database
+- Retrieval
+- LLM integration
+- Evaluation
+- Logging
