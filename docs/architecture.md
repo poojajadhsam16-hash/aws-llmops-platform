@@ -1,115 +1,123 @@
-# AWS LLMOps Platform Architecture
+# AWS Cloud Platform + AI/LLMOps Architecture
 
-## Project Overview
+## 1. Project Objective
 
-This project implements a production-style Retrieval-Augmented
-Generation (RAG) platform on AWS.
+Build a production-style Retrieval-Augmented Generation (RAG)
+application on AWS using infrastructure as code, containers,
+Kubernetes, CI/CD, security and monitoring.
 
-The platform will use AWS cloud infrastructure,
-Terraform, Kubernetes, CI/CD and LLMOps practices.
+## 2. Application Architecture
 
-## High-Level Architecture
-
-User
-↓
+User / Browser
+      |
+      v
 Application Load Balancer
-↓
+      |
+      v
 Amazon EKS
-↓
+      |
+      v
 FastAPI RAG Application
-↓
-Vector Search
-↓
-LLM
-↓
-Final Answer
+      |
+      +----> Vector Search
+      |
+      +----> LLM Integration
+      |
+      v
+Grounded Response
 
-## RAG Architecture
+## 3. AWS Network
+
+- Amazon VPC
+- Public subnets for internet-facing components where required
+- Private subnets for application workloads
+- Route tables and Internet Gateway
+- NAT Gateway only if required for private outbound connectivity
+- Security groups with restricted access
+
+## 4. AWS Services
+
+- Amazon EKS: Kubernetes platform
+- Amazon ECR: Container image registry
+- Amazon S3: Document storage
+- IAM: Identity and permissions
+- AWS KMS: Encryption-key management
+- CloudWatch: Logs, metrics and alarms
+- Application Load Balancer: Application traffic routing
+
+## 5. Infrastructure as Code
+
+Terraform will provision and manage the AWS infrastructure.
+
+Planned components:
+
+- VPC and subnets
+- IAM roles and policies
+- S3 bucket and encryption
+- EKS cluster and supporting resources
+- Monitoring configuration
+
+## 6. CI/CD Workflow
+
+GitHub
+  |
+  v
+GitHub Actions
+  |
+  v
+Test Application
+  |
+  v
+Build Docker Image
+  |
+  v
+Push Image to Amazon ECR
+  |
+  v
+Deploy to Amazon EKS
+  |
+  v
+Verify Application Health
+
+## 7. Security
+
+- Least-privilege IAM permissions
+- Encryption at rest where required
+- Secure secrets management
+- Restricted network access
+- No credentials committed to GitHub
+- Application and dependency testing
+
+## 8. Monitoring and Operations
+
+- Application logs
+- Container and cluster health
+- Request latency and error rates
+- CloudWatch alarms
+- Resource tagging and cost monitoring
+
+## 9. RAG Pipeline
 
 ### Document Ingestion
 
 Documents
-↓
-Text Extraction
-↓
-Chunking
-↓
-Embeddings
-↓
-Vector Database
+  -> Text Extraction
+  -> Chunking
+  -> Embeddings
+  -> Vector Store
 
 ### User Query
 
-User Question
-↓
-Question Embedding
-↓
-Similarity Search
-↓
-Relevant Chunks
-↓
-Context + Question
-↓
-LLM
-↓
-Final Answer
+Question
+  -> Retrieval
+  -> Relevant Context
+  -> LLM
+  -> Answer
 
-## AWS Supporting Services
+## 10. Implementation Status
 
-- Amazon S3
-- Amazon EKS
-- Amazon ECR
-- IAM
-- KMS
-- CloudWatch
-- Application Load Balancer
+Current stage: Architecture design and documentation.
 
-## Infrastructure as Code
+Infrastructure, application deployment, CI/CD and RAG
+integration will be implemented in later project stages.
 
-Terraform will be used to provision and manage
-the AWS infrastructure.
-
-## CI/CD
-
-GitHub
-↓
-GitHub Actions
-↓
-Docker Build
-↓
-Amazon ECR
-↓
-Amazon EKS
-
-## Monitoring
-
-CloudWatch will be used for:
-
-- Application logs
-- Infrastructure monitoring
-- Metrics
-- Alerts
-
-## Security
-
-The platform will use:
-
-- IAM
-- IAM roles
-- Least privilege
-- KMS encryption
-- Kubernetes Secrets
-- Secure configuration management
-
-## Future RAG Components
-
-The RAG implementation will include:
-
-- Document processing
-- Chunking
-- Embeddings
-- Vector database
-- Retrieval
-- LLM integration
-- Evaluation
-- Logging
