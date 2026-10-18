@@ -1,0 +1,7 @@
+AWS LLMOps Platform Operations Guide
+
+The application is built using Python and FastAPI.
+The application health endpoint is /health.
+Terraform provisions the AWS infrastructure.
+The S3 documents bucket stores project documents.
+The IAM application role provides controlled permissions to AWS services.
