@@ -30,6 +30,6 @@ output "iam_role_arn" {
 
 output "app_instance_profile_name" {
   description = "Name of the application EC2 instance profile"
-  value = module.iam.app_instance_profile_name
+  value       = module.iam.app_instance_profile_name
 }
 
