@@ -95,3 +95,31 @@ Do not expose the Ollama API port publicly.
 
 9. Security
 10. FinOps
+
+**Docker Image and CI/CD**
+
+**Published Docker Image**
+
+The application Docker image is published to Docker Hub:
+
+- Repository: "pooja3012/aws-llmops-platform"
+- Tag: "latest"
+- Architecture: "linux/amd64"
+
+**Pull the image:**
+
+docker pull pooja3012/aws-llmops-platform:latest
+
+**CI/CD Pipeline**
+
+GitHub Actions automates the following steps:
+
+1. Run application tests.
+2. Build the Docker image.
+3. Publish the image to Docker Hub after a push to the "main" branch.
+4. Build without publishing for pull requests.
+
+**Infrastructure Safety**
+
+The CI/CD workflow builds and publishes the image independently of the existing AWS infrastructure. Deployment to EC2 is not automated by this workflow.
+
