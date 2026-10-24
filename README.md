@@ -123,3 +123,54 @@ GitHub Actions automates the following steps:
 
 The CI/CD workflow builds and publishes the image independently of the existing AWS infrastructure. Deployment to EC2 is not automated by this workflow.
 
+**Local Docker Validation**
+
+**Test Results**
+
+Test| Result
+Docker Hub image pull| Passed
+Docker container startup| Passed
+FastAPI health endpoint ("GET /health")| Passed
+RAG retrieval endpoint ("GET /rag")| HTTP 200
+LLM question-answering endpoint ("GET /ask")| HTTP 200
+GitHub Actions CI tests| Passed
+Docker image build and publish workflow| Passed in the verified run
+
+**Validation Scope**
+
+The application was tested locally using the published Docker Hub image. The RAG endpoint successfully retrieved relevant context, and the LLM endpoint returned an answer.
+
+These results confirm local application functionality for the tested requests. They do not by themselves establish production readiness, load-test performance, or continuous deployment to EC2.
+
+**Infrastructure Safety**
+
+No AWS infrastructure changes were required for these local validation tests. Existing AWS resources and Terraform configuration are being retained.
+
+CloudWatch Review — AWS LLMOps Platform
+
+Date: 24 October 2026
+Region: "ap-south-1" (Mumbai)
+EC2 instance: "i-0177e7ee8eae72b62"
+
+**Review results**
+
+- CPU utilization: Pending review
+- Network metrics: Pending review
+- EC2 status-check metrics: Pending review
+- Existing CloudWatch alarms: Pending review
+- Existing dashboards: Pending review
+- Existing log groups: Pending review
+- Memory and disk metrics: Not confirmed
+
+**Change and cost control**
+
+- No new AWS resources created.
+- No existing AWS infrastructure modified.
+- No Terraform apply performed.
+- No new monitoring agent or custom metrics enabled.
+
+**Outcome**
+
+Read-only CloudWatch review completed after the actual metric and alarm states have been recorded.
+
+
