@@ -36,5 +36,5 @@ jobs:
           tags: |
                 pooja3012/aws-llmops-platform:latest
                 pooja3012/aws-llmops-platform:sha-$
-                {{github.sha}}
+                {{ github.sha }}
 
